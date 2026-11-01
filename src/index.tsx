@@ -1,5 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 import * as React from 'react'
+
+// Hide the lines before the first paint in the browser; fall back to
+// useEffect on the server, where layout effects do not run.
+const useIsomorphicLayoutEffect =
+  typeof window === 'undefined' ? useEffect : useLayoutEffect
 
 export interface PitchLinesProps {
   /** Primary line color (chalk). Any CSS color, including var(--token). */
@@ -37,7 +42,7 @@ export function PitchLines({
 }: PitchLinesProps) {
   const svgRef = useRef<SVGSVGElement>(null)
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const svg = svgRef.current
     if (!svg || !animate) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
