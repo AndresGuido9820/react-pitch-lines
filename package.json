@@ -29,7 +29,8 @@
     "prepare": "npm run build",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
-    "demo": "vite demo"
+    "demo": "vite demo",
+    "build:demo": "vite build demo --base=/react-pitch-lines/ --outDir ../demo-dist --emptyOutDir"
   },
   "peerDependencies": {
     "react": ">=18"
