@@ -8,9 +8,14 @@ Extracted from [my portfolio](https://github.com/AndresGuido9820), where it draw
 
 ## Install
 
+The package is not on the npm registry yet. Install it straight from GitHub;
+npm builds `dist/` during install through the `prepare` script:
+
 ```bash
-npm install react-pitch-lines
+npm install github:AndresGuido9820/react-pitch-lines
 ```
+
+Requires React 18 or newer.
 
 ## Usage
 
@@ -42,6 +47,16 @@ export function Hero() {
 | `className` | `string`  | —                         | Passed to the `<svg>`.                              |
 | `style`     | `object`  | —                         | Passed to the `<svg>`.                              |
 
+## Try it locally
+
+```bash
+git clone https://github.com/AndresGuido9820/react-pitch-lines.git
+cd react-pitch-lines
+npm install
+npm run demo   # opens a Vite page with the pitch and a Replay button
+npm test       # unit tests (Vitest + jsdom)
+```
+
 ## Why zero dependencies?
 
 The draw-in effect only needs `getTotalLength()` + the Web Animations API, both native. No GSAP, no framer-motion — nothing to add to your bundle.
@@ -49,6 +64,7 @@ The draw-in effect only needs `getTotalLength()` + the Web Animations API, both 
 ## Accessibility
 
 - Skips the animation entirely when the user has `prefers-reduced-motion: reduce`.
+- Lines are hidden before the first browser paint, so they do not flash fully drawn before the animation starts.
 - The SVG ships with `role="img"` and an `aria-label`.
 
 ---
